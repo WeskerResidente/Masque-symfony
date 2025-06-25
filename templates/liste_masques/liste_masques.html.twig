@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des Masques{% endblock %}
+
+{% block body %}
+  <h1 class="text-masques">🎭 Nos Masques Personnalisés</h1>
+
+  <ul class="masques">
+    {% for masque in masques %}
+      <li>
+        <strong>{{ masque.nom }}</strong>
+
+        <div class="details">
+          Caractéristique : {{ masque.caracteristique }}<br>
+          Valeur : {{ masque.valeur }} Euros<br>
+          Description : {{ masque.description }}<br>
+        </div>
+
+        <div class="masque-content">
+          <div class="btn-group">
+
+            <form method="POST" action="{{ path('masque', { id: masque.id }) }}" onsubmit="return confirm('Supprimer {{ masque.nom }} ?');">
+              <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ masque.id) }}">
+              <button type="submit" class="btn-supprimer">🗑 Supprimer</button>
+            </form>
+            <a href="{{ path('app_modifier_masque', { id: masque.id }) }}" class="btn-modifier">
+                 Modifier
+            </a>
+          <div class="img">
+            {% if masque.imageName %}
+              <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+            {% else %}
+              <p>Aucune image</p>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+    {% else %}
+      <li>Aucun masque trouvé.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
