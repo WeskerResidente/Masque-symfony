@@ -1,0 +1,43 @@
+.accueil {
+  background: url('../../../public/images/Background-home.png') no-repeat center;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  color: white;
+  text-align: center;
+  position: relative;
+
+  h1, h2, p {
+    text-shadow: 0 0 10px black;
+  }
+
+  .masques-grid {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .masque-card {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 1rem;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+  }
+}

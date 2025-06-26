@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <section class="accueil">
+    <h1>🎭 Bienvenue dans la Collection Masquée</h1>
+    <p>Découvrez notre sélection unique de masques du monde entier. Explorez, collectionnez et partagez votre passion.</p>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/norma/Symfony/Projet 1/masque/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/norma/Symfony/Projet 1/masque/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <h2>🆕 Derniers masques ajoutés</h2>
+    
+    <div class="masques-grid">
+      {% for masque in derniersMasques %}
+        <a href="{{ path('masque_detail', { id: masque.id }) }}" class="masque-card">
+          <h3>{{ masque.nom }}</h3>
+          <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
+          <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
+          {% if masque.imageName %}
+            <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+          {% else %}
+            <p>Aucune image</p>
+          {% endif %}
+        </a>
+      {% else %}
+        <p>Aucun masque disponible pour le moment.</p>
+      {% endfor %}
+    </div>
+  </section>
 {% endblock %}

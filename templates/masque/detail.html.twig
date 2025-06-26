@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ masque.nom }}{% endblock %}
+
+{% block body %}
+  <h1>{{ masque.nom }}</h1>
+
+  <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
+  <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
+  <p><strong>Description :</strong> {{ masque.description }}</p>
+
+  {% if masque.imageName %}
+    <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+  {% endif %}
+
+  <h2>Commentaires</h2>
+  <ul>
+    {% for commentaire in masque.commentaires %}
+      <li>{{ commentaire.commentaire }}</li>
+    {% else %}
+      <li>Aucun commentaire.</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Ajouter un commentaire</h3>
+  {{ form_start(form) }}
+    {{ form_row(form.commentaire) }}
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  {{ form_end(form) }}
+{% endblock %}
