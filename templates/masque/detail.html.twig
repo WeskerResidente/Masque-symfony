@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}{{ masque.nom }}{% endblock %}
 
 {% block body %}
@@ -15,15 +16,31 @@
   <h2>Commentaires</h2>
   <ul>
     {% for commentaire in masque.commentaires %}
-      <li>{{ commentaire.commentaire }}</li>
+      <li>
+        <strong>
+          {% if commentaire.auteur %}
+            {{ commentaire.auteur }}
+          {% elseif commentaire.user %}
+            {{ commentaire.user.username }}
+          {% else %}
+            Anonyme
+          {% endif %}
+        </strong> :
+        {{ commentaire.commentaire }}
+      </li>
     {% else %}
       <li>Aucun commentaire.</li>
     {% endfor %}
   </ul>
 
-  <h3>Ajouter un commentaire</h3>
-  {{ form_start(form) }}
-    {{ form_row(form.commentaire) }}
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-  {{ form_end(form) }}
+  {% if app.user %}
+    <h3>Ajouter un commentaire</h3>
+    {{ form_start(form) }}
+      {{ form_row(form.auteur, { label: 'Votre nom (facultatif)' }) }}
+      {{ form_row(form.commentaire) }}
+      <button type="submit">Envoyer</button>
+    {{ form_end(form) }}
+  {% else %}
+    <p>🔒 <a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+  {% endif %}
 {% endblock %}

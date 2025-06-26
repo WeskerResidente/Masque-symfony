@@ -37,6 +37,7 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('admin') }}">Admin</a></li>
                 {% endif %}
+                <li><a href="{{ path('app_contact') }}">Contact</a></li>
                 <li>
                     <form action="{{ path('app_logout') }}" method="post">
                     <button class="btn-logout" type="submit">🚪 Déconnexion</button>
