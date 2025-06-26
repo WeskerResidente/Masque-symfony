@@ -8,11 +8,11 @@
 {% endblock %}
 {% block body %}
   <section class="accueil">
-    <h1>🎭 Bienvenue dans la Collection Masquée</h1>
-    <p>Découvrez notre sélection unique de masques du monde entier. Explorez, collectionnez et partagez votre passion.</p>
-
-    <h2>🆕 Derniers masques ajoutés</h2>
-
+        <div class="intro">
+        <h1>Bienvenue dans la Collection Masquée</h1>
+        <p>Explorez, collectionnez et partagez votre passion.</p>
+        <h2>Derniers masques ajoutés</h2>
+        </div>
     <div class="swiper">
       <div class="swiper-wrapper">
         {% for masque in derniersMasques %}

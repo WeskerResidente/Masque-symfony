@@ -1,6 +1,6 @@
 .accueil {
   position: relative;
-  background: url('../../../public/images/Background-home.png')no-repeat center center;
+  background: url('../../../public/images/background-home2.webp')no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   padding-top: 4rem;
@@ -8,8 +8,35 @@
   text-align: center;
   overflow: hidden;
 
-  h1, p, h2 {
-    text-shadow: 0 0 10px black;
+.intro {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+    margin-top: 15rem;
+    margin-left: 29rem;
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #e6c779;
+      text-shadow: 0 0 10px black;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #f0f0f0;
+      text-shadow: 0 0 8px black;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #e6c779;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px black;
+    }
   }
 
   .swiper {

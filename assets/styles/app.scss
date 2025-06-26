@@ -1,5 +1,9 @@
 // COMPONENTS
 @use "components/masque";
+@use "components/navbar";
 
 //LAYOUT
 @use "layout/homes";
+
+//BASE
+@use "base/global";
