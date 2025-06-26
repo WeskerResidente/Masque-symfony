@@ -6,11 +6,8 @@
 <section class="contact-page">
     <div class="contact-container">
         <h1>Contactez-nous</h1>
-
         {% for message in app.flashes('success') %}
-            <div class="flash-success">
-                {{ message }}
-            </div>
+            <div class="flash-success">{{ message }}</div>
         {% endfor %}
 
         {{ form_start(form) }}
@@ -23,3 +20,4 @@
     </div>
 </section>
 {% endblock %}
+

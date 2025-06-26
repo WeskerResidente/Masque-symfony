@@ -21,15 +21,26 @@
       margin-bottom: 2rem;
       color: #e6c779;
     }
+        .flash-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+        }
 
-    .flash-success {
-      background: #1d2f1d;
-      border: 1px solid #51cf66;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
-      color: #baffc9;
-    }
+        .flash-success {
+        background-color: rgba(230, 199, 121, 0.1);
+        border: 1px solid #e6c779;
+        color: #e6c779;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        max-width: 500px;
+        text-align: center;
+        font-family: 'Cinzel', serif;
+        font-size: 1rem;
+        text-shadow: 0 0 2px black;
+        box-shadow: 0 0 10px rgba(230, 199, 121, 0.2);
+        animation: fadeInSlide 0.5s ease-out;
+        }
 
     label {
       font-weight: bold;
@@ -55,6 +66,17 @@
       &:hover {
         background: #c9ac5f;
       }
+    }
+  }
+
+  @keyframes fadeInSlide {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

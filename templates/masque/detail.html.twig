@@ -3,44 +3,48 @@
 {% block title %}{{ masque.nom }}{% endblock %}
 
 {% block body %}
-  <h1>{{ masque.nom }}</h1>
+    <section class="masque-detail-page">
+        <div class="masque-container">
+            <h1>{{ masque.nom }}</h1>
 
-  <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
-  <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
-  <p><strong>Description :</strong> {{ masque.description }}</p>
+            <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
+            <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
+            <p><strong>Description :</strong> {{ masque.description }}</p>
 
-  {% if masque.imageName %}
-    <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
-  {% endif %}
+            {% if masque.imageName %}
+                <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+            {% endif %}
 
-  <h2>Commentaires</h2>
-  <ul>
-    {% for commentaire in masque.commentaires %}
-      <li>
-        <strong>
-          {% if commentaire.auteur %}
-            {{ commentaire.auteur }}
-          {% elseif commentaire.user %}
-            {{ commentaire.user.username }}
-          {% else %}
-            Anonyme
-          {% endif %}
-        </strong> :
-        {{ commentaire.commentaire }}
-      </li>
-    {% else %}
-      <li>Aucun commentaire.</li>
-    {% endfor %}
-  </ul>
+            <h2>Commentaires</h2>
+            <ul>
+                {% for commentaire in masque.commentaires %}
+                <li>
+                    <strong>
+                    {% if commentaire.auteur %}
+                        {{ commentaire.auteur }}
+                    {% elseif commentaire.user %}
+                        {{ commentaire.user.username }}
+                    {% else %}
+                        Anonyme
+                    {% endif %}
+                    </strong> :
+                    {{ commentaire.commentaire }}
+                </li>
+                {% else %}
+                <li>Aucun commentaire.</li>
+                {% endfor %}
+            </ul>
 
-  {% if app.user %}
-    <h3>Ajouter un commentaire</h3>
-    {{ form_start(form) }}
-      {{ form_row(form.auteur, { label: 'Votre nom (facultatif)' }) }}
-      {{ form_row(form.commentaire) }}
-      <button type="submit">Envoyer</button>
-    {{ form_end(form) }}
-  {% else %}
-    <p>🔒 <a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
-  {% endif %}
+            {% if app.user %}
+                <h3>Ajouter un commentaire</h3>
+                {{ form_start(form) }}
+                {{ form_row(form.auteur, { label: 'Votre nom (facultatif)' }) }}
+                {{ form_row(form.commentaire) }}
+                <button type="submit">Envoyer</button>
+                {{ form_end(form) }}
+            {% else %}
+                <p>🔒 <a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+            {% endif %}
+        </div>
+    </section>    
 {% endblock %}

@@ -2,7 +2,8 @@
 {% block title %}Liste des Masques{% endblock %}
 
 {% block body %}
-  <h1 class="text-masques">🎭 Nos Masques Personnalisés</h1>
+  <section class"masques">
+    <h1 class="text-masques">🎭 Nos Masques Personnalisés</h1>
 
     <div class="masque-grid">
       {% for masque in masques %}
@@ -37,6 +38,6 @@
         <p>Aucun masque trouvé.</p>
       {% endfor %}
     </div>
-
+  </section>
 
 {% endblock %}
