@@ -2,28 +2,38 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('app') }}
+{% endblock %}
 {% block body %}
   <section class="accueil">
     <h1>🎭 Bienvenue dans la Collection Masquée</h1>
     <p>Découvrez notre sélection unique de masques du monde entier. Explorez, collectionnez et partagez votre passion.</p>
 
     <h2>🆕 Derniers masques ajoutés</h2>
-    
-    <div class="masques-grid">
-      {% for masque in derniersMasques %}
-        <a href="{{ path('masque_detail', { id: masque.id }) }}" class="masque-card">
-          <h3>{{ masque.nom }}</h3>
-          <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
-          <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
-          {% if masque.imageName %}
-            <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
-          {% else %}
-            <p>Aucune image</p>
-          {% endif %}
-        </a>
-      {% else %}
-        <p>Aucun masque disponible pour le moment.</p>
-      {% endfor %}
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {% for masque in derniersMasques %}
+          <div class="swiper-slide">
+            <a href="{{ path('masque_detail', { id: masque.id }) }}" class="carousel-card">
+              {% if masque.imageName %}
+                <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+              {% endif %}
+              <div class="infos">
+                <h3>{{ masque.nom }}</h3>
+                <p>{{ masque.caracteristique }}</p>
+                <p>Valeur estimée : {{ masque.valeur }} €</p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Flèches -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
   </section>
 {% endblock %}
