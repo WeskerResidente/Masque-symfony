@@ -21,12 +21,12 @@ final class AddMasqueControlleurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $masque->setCreatedBy($this->getUser()); // ✅ ici on utilise bien $masque
             $entityManager->persist($masque);
             $entityManager->flush();
 
             $this->addFlash('success', 'Masque ajouté avec succès !');
-
-            return $this->redirectToRoute('app_home'); // redirige vers l'accueil ou une autre page
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('add_masque_controlleur/add_masque_controlleur.html.twig', [

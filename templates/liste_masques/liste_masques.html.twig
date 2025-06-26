@@ -4,38 +4,39 @@
 {% block body %}
   <h1 class="text-masques">🎭 Nos Masques Personnalisés</h1>
 
-  <ul class="masques">
-    {% for masque in masques %}
-      <li>
-        <strong>{{ masque.nom }}</strong>
+    <div class="masque-grid">
+      {% for masque in masques %}
+        <div class="masque-card">
+          <img class="masque-img" src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
 
-        <div class="details">
-          Caractéristique : {{ masque.caracteristique }}<br>
-          Valeur : {{ masque.valeur }} Euros<br>
-          Description : {{ masque.description }}<br>
-        </div>
-
-        <div class="masque-content">
-          <div class="btn-group">
-
-            <form method="POST" action="{{ path('masque', { id: masque.id }) }}" onsubmit="return confirm('Supprimer {{ masque.nom }} ?');">
-              <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ masque.id) }}">
-              <button type="submit" class="btn-supprimer">🗑 Supprimer</button>
-            </form>
-            <a href="{{ path('app_modifier_masque', { id: masque.id }) }}" class="btn-modifier">
-                 Modifier
-            </a>
-          <div class="img">
-            {% if masque.imageName %}
-              <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+          <div class="masque-info">
+            <h2>{{ masque.nom }}</h2>
+            <p>Caractéristique : {{ masque.caracteristique }}</p>
+            <p>Valeur : {{ masque.valeur }} €</p>
+            <p>Description : {{ masque.description }}</p>
+            {% if masque.createdBy %}
+              <p class="auteur">par {{ masque.createdBy.email }}</p>
             {% else %}
-              <p>Aucune image</p>
+              <p class="auteur">auteur inconnu</p>
+            {% endif %}
+
+            {% if app.user and masque.createdBy and app.user.id == masque.createdBy.id %}
+              <div class="actions">
+                <a href="{{ path('app_modifier_masque', { id: masque.id }) }}" class="btn modifier">✏ Modifier</a>
+                <form method="POST" action="{{ path('masque', { id: masque.id }) }}" onsubmit="return confirm('Supprimer {{ masque.nom }} ?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ masque.id) }}">
+                  <button type="submit" class="btn supprimer">🗑 Supprimer</button>
+                </form>
+              </div>
             {% endif %}
           </div>
+
+          <a href="{{ path('masque_detail', { id: masque.id }) }}" class="full-link" aria-label="Voir le masque {{ masque.nom }}"></a>
         </div>
-      </li>
-    {% else %}
-      <li>Aucun masque trouvé.</li>
-    {% endfor %}
-  </ul>
+      {% else %}
+        <p>Aucun masque trouvé.</p>
+      {% endfor %}
+    </div>
+
+
 {% endblock %}

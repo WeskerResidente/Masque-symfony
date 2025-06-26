@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
+use App\Entity\Commentaire;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MasqueRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
+
 
 
 #[Vich\Uploadable]
@@ -123,5 +128,29 @@ class Masque
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+    #[ORM\OneToMany(mappedBy: 'masque', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
+    private Collection $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
+
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+    #[ORM\ManyToOne(inversedBy: 'masques')]
+    private ?User $createdBy = null;
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $user): static
+    {
+        $this->createdBy = $user;
+        return $this;
     }
 }
