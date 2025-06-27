@@ -135,6 +135,7 @@ class Masque
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getCommentaires(): Collection
@@ -151,6 +152,19 @@ class Masque
     public function setCreatedBy(?User $user): static
     {
         $this->createdBy = $user;
+        return $this;
+    }
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

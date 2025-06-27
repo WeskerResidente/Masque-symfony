@@ -39,3 +39,12 @@ const swiper = new Swiper('.swiper', {
     disableOnInteraction: false,
   },
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const flashes = document.querySelectorAll('.global-flash');
+  flashes.forEach(flash => {
+    setTimeout(() => {
+      flash.classList.add('fade-out');
+      setTimeout(() => flash.remove(), 500); // retire le flash après l'animation
+    }, 4000); // après 4 secondes
+  });
+});

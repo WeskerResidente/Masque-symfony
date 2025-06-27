@@ -1,11 +1,13 @@
 // COMPONENTS
 @use "components/masque";
 @use "components/navbar";
-
+@use "components/flash";
 //LAYOUT
 @use "layout/homes";
 @use "layout/contact";
 @use "layout/masque_detail";
+@use "layout/ajout-masque";
+@use "layout/modifier-masque";
 
 //BASE
 @use "base/global";

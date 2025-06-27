@@ -3,10 +3,14 @@
 {% block title %}Ajouter un masque{% endblock %}
 
 {% block body %}
+<section class="ajout-masque-page">
+  <div class="ajout-masque-container">
     <h1>Ajouter un masque</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-primary">Enregistrer</button>
+      {{ form_widget(form) }}
+      <button class="btn">Enregistrer</button>
     {{ form_end(form) }}
+  </div>
+</section>
 {% endblock %}

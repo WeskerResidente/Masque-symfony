@@ -50,7 +50,13 @@
                 </ul>
             </nav>
         {% endblock %}
-
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                    <div class="global-flash {{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
         {% block body %}{% endblock %}
 
         <script>

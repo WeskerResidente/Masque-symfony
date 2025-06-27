@@ -12,7 +12,8 @@ class ListeMasquesController extends AbstractController
     #[Route('/listes/masque', name: 'app_liste_masques')]
     public function index(MasqueRepository $repository): Response
     {
-        $masques = $repository->findAll();
+        $masques = $repository->findBy([], ['createdAt' => 'DESC']);
+
 
         return $this->render('liste_masques/liste_masques.html.twig', [
             'masques' => $masques,
