@@ -39,6 +39,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Masques', 'fas fa-theater-masks', Masque::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Commentaire::class);
+        yield MenuItem::linkToCrud('Notations', 'fas fa-star', \App\Entity\Notation::class);
         yield MenuItem::linkToRoute('Retour au site', 'fas fa-undo', 'app_home');
+
     }
 }

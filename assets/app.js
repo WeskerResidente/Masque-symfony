@@ -7,6 +7,7 @@ import './bootstrap.js';
  */
 import './styles/app.scss';
 
+
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 
@@ -48,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000); // après 4 secondes
   });
 });
+
+// JS pour la recherche avancée
 function toggleAdvanced() {
     const section = document.getElementById('advancedSearch');
     if (section.style.display === 'none' || section.style.display === '') {
@@ -57,3 +60,44 @@ function toggleAdvanced() {
     }
 }
 window.toggleAdvanced = toggleAdvanced;
+
+// au lieu de : import './stars.js';
+
+console.log('🎯 Début du stars.js');
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('✨ stars.js DOM loaded');
+
+    const stars = document.querySelectorAll('#star-widget .star');
+    const input = document.getElementById('notation_note_hidden');
+
+    if (!input) {
+        console.warn('⛔ Le champ #notation_note_hidden est introuvable.');
+        return;
+    }
+
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            input.value = index + 1;
+            highlightStars(index);
+        });
+
+        star.addEventListener('mouseover', () => {
+            highlightStars(index);
+        });
+
+        star.addEventListener('mouseout', () => {
+            highlightStars(parseInt(input.value) - 1);
+        });
+    });
+
+    function highlightStars(index) {
+        stars.forEach((star, i) => {
+            star.style.color = i <= index ? 'gold' : '#888';
+        });
+    }
+
+    if (input.value) {
+        highlightStars(parseInt(input.value) - 1);
+    }
+});

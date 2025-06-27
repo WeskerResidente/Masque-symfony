@@ -6,6 +6,8 @@
   <section class="masques">
     <h1 class="text-masques">Listes des masques</h1>
 
+
+    {# SECTION SEARCHBAR #}
     <div class="search-container">
         {{ form_start(form) }}
             <div class="search-main">
@@ -65,7 +67,7 @@
           <a href="{{ path('masque_detail', { id: masque.id }) }}" class="full-link" aria-label="Voir le masque {{ masque.nom }}"></a>
         </div>
       {% else %}
-        <p class="masque-empty-message">🎭 Aucun masque trouvé.</p>
+        <p class="masque-empty-message"> Aucun masque trouvé.</p>
       {% endfor %}
     </div>
   </section>

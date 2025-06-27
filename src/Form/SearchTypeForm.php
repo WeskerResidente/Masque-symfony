@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchTypeForm extends AbstractType
 {
+    // Caractéristique des valeur de la recherche
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

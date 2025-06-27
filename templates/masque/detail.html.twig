@@ -14,22 +14,39 @@
             {% if masque.imageName %}
                 <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
             {% endif %}
+            <h2> Notes </h2>
+            {% if masque.getAverageNote() %}
+                        <p>Note moyenne : {{ masque.getAverageNote() }} / 5 ⭐</p>
+                    {% else %}
+                        <p>Ce masque n'a pas encore été noté.</p>
+            {% endif %}
+            <h3>Noter ce masque</h3>
+
+            {{ form_start(formNote) }}
+                <div id="star-widget" class="star-widget">
+                    {% for i in 1..5 %}
+                        <span class="star" data-value="{{ i }}">&#9733;</span>
+                    {% endfor %}
+                </div>
+                {{ form_widget(formNote.note, {'id': 'notation_note_hidden'}) }}
+                <button type="submit">Noter</button>
+            {{ form_end(formNote) }}
 
             <h2>Commentaires</h2>
             <ul>
                 {% for commentaire in masque.commentaires %}
-                <li>
-                    <strong>
-                    {% if commentaire.auteur %}
-                        {{ commentaire.auteur }}
-                    {% elseif commentaire.user %}
-                        {{ commentaire.user.username }}
-                    {% else %}
-                        Anonyme
-                    {% endif %}
-                    </strong> :
-                    {{ commentaire.commentaire }}
-                </li>
+                    <li>
+                        <strong>
+                        {% if commentaire.auteur %}
+                            {{ commentaire.auteur }}
+                        {% elseif commentaire.user %}
+                            {{ commentaire.user.username }}
+                        {% else %}
+                            Anonyme
+                        {% endif %}
+                        </strong> :
+                        {{ commentaire.commentaire }}
+                    </li>
                 {% else %}
                 <li>Aucun commentaire.</li>
                 {% endfor %}

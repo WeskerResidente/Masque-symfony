@@ -1,6 +1,6 @@
 <?php
 
-// src/Data/SearchData.php
+// Valeur pour la searchbar
 namespace App\Data;
 
 class SearchData
