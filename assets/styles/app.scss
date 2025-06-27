@@ -2,12 +2,15 @@
 @use "components/masque";
 @use "components/navbar";
 @use "components/flash";
+@use "components/messagesempty";
 //LAYOUT
 @use "layout/homes";
 @use "layout/contact";
 @use "layout/masque_detail";
 @use "layout/ajout-masque";
 @use "layout/modifier-masque";
+@use "layout/register";
+@use "layout/login";
 
 //BASE
 @use "base/global";

@@ -1,0 +1,14 @@
+.masque-empty-message {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #e6c779;
+  background-color: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 5rem auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+}
