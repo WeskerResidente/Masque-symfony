@@ -5,7 +5,7 @@
 {% block body %}
 <section class="mes-masques">
     <h1 class="text-masques"> Mes Masques</h1>
-
+    
     <div class="masque-grid">
         {% for masque in masques %}
             <div class="masque-card">
@@ -25,7 +25,7 @@
                         </form>
                     </div>
                 </div>
-
+                
                 <a href="{{ path('masque_detail', { id: masque.id }) }}" class="full-link"></a>
             </div>
         {% else %}

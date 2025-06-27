@@ -14,11 +14,24 @@
             {% if masque.imageName %}
                 <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
             {% endif %}
-            <h2> Notes </h2>
-            {% if masque.getAverageNote() %}
-                        <p>Note moyenne : {{ masque.getAverageNote() }} / 5 ⭐</p>
-                    {% else %}
-                        <p>Ce masque n'a pas encore été noté.</p>
+            <h3>Notes</h3>
+
+            {% set moyenne = masque.getAverageNote() %}
+            {% if moyenne %}
+                {% set pleine = moyenne|round(0, 'floor') %}
+                {% set vide = 5 - pleine %}
+
+                <p>
+                    Note moyenne : <strong>{{ moyenne }}/5</strong>
+                    {% for i in 1..pleine %}
+                        <span style="color: gold;">&#9733;</span>
+                    {% endfor %}
+                    {% for i in 1..vide %}
+                        <span style="color: #666;">&#9733;</span>
+                    {% endfor %}
+                </p>
+            {% else %}
+                <p>Ce masque n’a pas encore été noté.</p>
             {% endif %}
             <h3>Noter ce masque</h3>
 
