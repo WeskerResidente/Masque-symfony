@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Masque;
+use App\Data\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,35 @@ class MasqueRepository extends ServiceEntityRepository
         parent::__construct($registry, Masque::class);
     }
 
-//    /**
-//     * @return Masque[] Returns an array of Masque objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Recherche personnalisée avec filtres dynamiques
+     * 
+     * @param SearchData $search
+     * @return Masque[]
+     */
+    public function findSearch(SearchData $search): array
+    {
+        $query = $this->createQueryBuilder('m');
 
-//    public function findOneBySomeField($value): ?Masque
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    if (!empty($search->q)) {
+        $query->andWhere('m.Nom LIKE :q OR m.Description LIKE :q OR m.Caracteristique LIKE :q')
+              ->setParameter('q', '%' . $search->q . '%');
+    }
+
+        if ($search->min !== null) {
+            $query->andWhere('m.Valeur >= :min')
+               ->setParameter('min', $search->min);
+        }
+
+        if ($search->max !== null) {
+            $query->andWhere('m.Valeur <= :max')
+               ->setParameter('max', $search->max);
+        }
+
+
+        return $query->orderBy('m.createdAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+        }
 }
