@@ -22,30 +22,39 @@ class MasqueRepository extends ServiceEntityRepository
      * 
      * @param SearchData $search
      * @return Masque[]
-     */
-    public function findSearch(SearchData $search): array
-    {
-        $query = $this->createQueryBuilder('m');
+            */
+        public function findSearch(SearchData $search): array
+        {
+            $qb = $this->createQueryBuilder('m');
 
+            if (!empty($search->q)) {
+                $qb->andWhere('m.Nom LIKE :q')
+                ->setParameter('q', '%' . $search->q . '%');
+            }
 
-    if (!empty($search->q)) {
-        $query->andWhere('m.Nom LIKE :q OR m.Description LIKE :q OR m.Caracteristique LIKE :q')
-              ->setParameter('q', '%' . $search->q . '%');
-    }
+            if (!empty($search->caracteristique)) {
+                $qb->andWhere('m.Caracteristique LIKE :carac')
+                ->setParameter('carac', '%' . $search->caracteristique . '%');
+            }
 
-        if ($search->min !== null) {
-            $query->andWhere('m.Valeur >= :min')
-               ->setParameter('min', $search->min);
-        }
+            if (!empty($search->description)) {
+                $qb->andWhere('m.Description LIKE :desc')
+                ->setParameter('desc', '%' . $search->description . '%');
+            }
 
-        if ($search->max !== null) {
-            $query->andWhere('m.Valeur <= :max')
-               ->setParameter('max', $search->max);
-        }
+            if ($search->min !== null) {
+                $qb->andWhere('m.Valeur >= :min')
+                ->setParameter('min', $search->min);
+            }
 
+            if ($search->max !== null) {
+                $qb->andWhere('m.Valeur <= :max')
+                ->setParameter('max', $search->max);
+            }
 
-        return $query->orderBy('m.createdAt', 'DESC')
+            return $qb->orderBy('m.createdAt', 'DESC')
                     ->getQuery()
                     ->getResult();
         }
+
 }

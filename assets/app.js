@@ -48,3 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000); // après 4 secondes
   });
 });
+function toggleAdvanced() {
+    const section = document.getElementById('advancedSearch');
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+    } else {
+        section.style.display = 'none';
+    }
+}
+window.toggleAdvanced = toggleAdvanced;

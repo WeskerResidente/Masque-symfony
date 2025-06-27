@@ -1,35 +1,29 @@
 <?php
 
+// src/Form/SearchFormType.php
 namespace App\Form;
 
 use App\Data\SearchData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchFormType extends AbstractType
+class SearchTypeForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('q', TextType::class, [
-                'label' => 'Recherche',
                 'required' => false,
-                'attr' => [
-                    'placeholder' => 'Rechercher un masque...',
-                    'class' => 'search-input'
-                ]
+                'label' => false,
+                'attr' => ['placeholder' => 'Rechercher un masque...']
             ])
-            ->add('min', IntegerType::class, [
-                'label' => 'Valeur min',
-                'required' => false
-            ])
-            ->add('max', IntegerType::class, [
-                'label' => 'Valeur max',
-                'required' => false
-            ]);
+            ->add('min', IntegerType::class, ['required' => false, 'label' => 'Valeur minimale'])
+            ->add('max', IntegerType::class, ['required' => false, 'label' => 'Valeur maximale'])
+            ->add('caracteristique', TextType::class, ['required' => false])
+            ->add('description', TextType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
