@@ -23,15 +23,13 @@
             <h3>Noter ce masque</h3>
 
             {{ form_start(formNote) }}
-                <div id="star-widget" class="star-widget">
+                <div id="star-widget" class="star-widget" data-already-rated="{{ userHasRated ? 1 : 0 }}">
                     {% for i in 1..5 %}
                         <span class="star" data-value="{{ i }}">&#9733;</span>
                     {% endfor %}
                 </div>
                 {{ form_widget(formNote.note, {'id': 'notation_note_hidden'}) }}
-                <button type="submit">Noter</button>
             {{ form_end(formNote) }}
-
             <h2>Commentaires</h2>
             <ul>
                 {% for commentaire in masque.commentaires %}
@@ -63,5 +61,8 @@
                 <p>🔒 <a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
             {% endif %}
         </div>
-    </section>    
+    </section>
+    <script>
+        window.userHasRated = {{ userHasRated ? 'true' : 'false' }};
+    </script>
 {% endblock %}
