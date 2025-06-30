@@ -2,20 +2,28 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Form\SearchTypeForm;
 use App\Repository\MasqueRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ListeMasquesController extends AbstractController
 {
-    #[Route('/listes/masque', name: 'app_liste_masques')]
-    public function index(MasqueRepository $repository): Response
-    {
-        $masques = $repository->findAll();
+        #[Route('/listes/masque', name: 'app_liste_masques')]
+        public function index(Request $request, MasqueRepository $repository): Response
+        {
+            $searchData = new SearchData();
+            $form = $this->createForm(SearchTypeForm::class, $searchData);
+            $form->handleRequest($request);
 
-        return $this->render('liste_masques/liste_masques.html.twig', [
-            'masques' => $masques,
-        ]);
-    }
+            $masques = $repository->findSearch($searchData);
+
+            return $this->render('liste_masques/liste_masques.html.twig', [
+                'masques' => $masques,
+                'form' => $form->createView(),
+            ]);
+        }
 }

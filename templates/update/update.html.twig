@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier un masque{% endblock %}
+{% block title %}Modifier le masque{% endblock %}
 
 {% block body %}
-    <h1>Modifier le masque : {{ masque.nom }}</h1>
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
+<section class="modifier-masque-page">
+  <div class="modifier-masque-container">
+    <h1>Modifier le masque</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit">Mettre à jour</button>
+        <button class="btn">✏ Enregistrer les modifications</button>
     {{ form_end(form) }}
+  </div>
+</section>
 {% endblock %}

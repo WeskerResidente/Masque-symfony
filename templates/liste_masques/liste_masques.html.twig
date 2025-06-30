@@ -1,8 +1,29 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Liste des Masques{% endblock %}
 
 {% block body %}
-  <h1 class="text-masques">🎭 Nos Masques Personnalisés</h1>
+  <section class="masques">
+    <h1 class="text-masques">Listes des masques</h1>
+
+
+    {# SECTION SEARCHBAR #}
+    <div class="search-container">
+        {{ form_start(form) }}
+            <div class="search-main">
+                {{ form_row(form.q, {'label': false, 'attr': {'placeholder': 'Rechercher un masque...'}}) }}
+                <button type="submit" class="search-button">🔍 Rechercher</button>
+                <button type="button" class="advanced-toggle" onclick="toggleAdvanced()">Filtre avancés⏷</button>
+            </div>
+
+            <div class="search-advanced" id="advancedSearch" style="display: none;">
+              {{ form_row(form.min) }}
+              {{ form_row(form.max) }}
+              {{ form_row(form.caracteristique) }}
+              {{ form_row(form.description) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
 
     <div class="masque-grid">
       {% for masque in masques %}
@@ -11,9 +32,21 @@
 
           <div class="masque-info">
             <h2>{{ masque.nom }}</h2>
-            <p>Caractéristique : {{ masque.caracteristique }}</p>
+
+            {% set shortCaracteristique = masque.caracteristique|length > 20
+                ? masque.caracteristique|slice(0, 20) ~ '...'
+                : masque.caracteristique
+            %}
+
+            {% set shortDescription = masque.description|length > 50
+                ? masque.description|slice(0, 50) ~ '...'
+                : masque.description
+            %}
+
+            <p>Caractéristique : {{ shortCaracteristique }}</p>
             <p>Valeur : {{ masque.valeur }} €</p>
-            <p>Description : {{ masque.description }}</p>
+            <p>Description : {{ shortDescription }}</p>
+
             {% if masque.createdBy %}
               <p class="auteur">par {{ masque.createdBy.email }}</p>
             {% else %}
@@ -34,9 +67,8 @@
           <a href="{{ path('masque_detail', { id: masque.id }) }}" class="full-link" aria-label="Voir le masque {{ masque.nom }}"></a>
         </div>
       {% else %}
-        <p>Aucun masque trouvé.</p>
+        <p class="masque-empty-message"> Aucun masque trouvé.</p>
       {% endfor %}
     </div>
-
-
+  </section>
 {% endblock %}

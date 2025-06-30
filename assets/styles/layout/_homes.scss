@@ -1,34 +1,72 @@
 .accueil {
-  background: url('../../../public/images/Background-home.png') no-repeat center;
+  position: relative;
+  background: url('~/public/images/background-home2.webp')no-repeat center center;
   background-size: cover;
   min-height: 100vh;
-  padding: 3rem 2rem;
+  padding-top: 4rem;
   color: white;
   text-align: center;
-  position: relative;
+  overflow: hidden;
 
-  h1, h2, p {
-    text-shadow: 0 0 10px black;
+.intro {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+    margin-top: 15rem;
+    margin-left: 29rem;
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #e6c779;
+      text-shadow: 0 0 10px black;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #f0f0f0;
+      text-shadow: 0 0 8px black;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #e6c779;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px black;
+    }
   }
 
-  .masques-grid {
-    margin-top: 4rem;
+  .swiper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 7rem; // ↤ ajuste cette valeur pour que ça tombe pile sur le plateau
+    width: 90%;
+    max-width: 800px;
+    z-index: 10;
+  }
+
+  .swiper-wrapper {
+    align-items: center;
+  }
+
+  .swiper-slide {
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow-x: auto;
-    gap: 1.5rem;
-    padding: 1rem;
   }
 
-  .masque-card {
+  .carousel-card {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 12px;
-    padding: 1rem;
-    min-width: 200px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    width: 200px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
-    cursor: pointer;
 
     &:hover {
       transform: scale(1.05);
@@ -36,8 +74,72 @@
 
     img {
       width: 100%;
-      border-radius: 8px;
-      margin-top: 0.5rem;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .infos {
+      padding: 0.5rem;
+      font-size: 0.9rem;
     }
   }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: white;
+    filter: drop-shadow(0 0 5px black);
+  }
+}
+.carousel-card {
+  width: 200px;
+  height: auto;
+  min-height: 280px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transform-origin: center;
+  padding-bottom: 1rem;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .infos {
+    padding: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
+
+    h3 {
+      margin: 0.2rem 0;
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+
+.swiper {
+  position: absolute;
+  bottom: 6rem;
+  left: 50%;
+  margin-left: -40px; // 🔁 Ajuste cette valeur vers -100px ou -120px selon le visuel
+  width: 90%;
+  max-width: 800px;
+  z-index: 10;
 }

@@ -1,29 +1,81 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}{{ masque.nom }}{% endblock %}
 
 {% block body %}
-  <h1>{{ masque.nom }}</h1>
+    <section class="masque-detail-page">
+        <div class="masque-container">
+            <h1>{{ masque.nom }}</h1>
 
-  <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
-  <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
-  <p><strong>Description :</strong> {{ masque.description }}</p>
+            <p><strong>Caractéristique :</strong> {{ masque.caracteristique }}</p>
+            <p><strong>Valeur :</strong> {{ masque.valeur }} €</p>
+            <p><strong>Description :</strong> {{ masque.description }}</p>
 
-  {% if masque.imageName %}
-    <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
-  {% endif %}
+            {% if masque.imageName %}
+                <img src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+            {% endif %}
+            <h3>Notes</h3>
 
-  <h2>Commentaires</h2>
-  <ul>
-    {% for commentaire in masque.commentaires %}
-      <li>{{ commentaire.commentaire }}</li>
-    {% else %}
-      <li>Aucun commentaire.</li>
-    {% endfor %}
-  </ul>
+            {% set moyenne = masque.getAverageNote() %}
+            {% if moyenne %}
+                {% set pleine = moyenne|round(0, 'floor') %}
+                {% set vide = 5 - pleine %}
 
-  <h3>Ajouter un commentaire</h3>
-  {{ form_start(form) }}
-    {{ form_row(form.commentaire) }}
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-  {{ form_end(form) }}
+                <p>
+                    Note moyenne : <strong>{{ moyenne }}/5</strong>
+                    {% for i in 1..pleine %}
+                        <span style="color: gold;">&#9733;</span>
+                    {% endfor %}
+                    {% for i in 1..vide %}
+                        <span style="color: #666;">&#9733;</span>
+                    {% endfor %}
+                </p>
+            {% else %}
+                <p>Ce masque n’a pas encore été noté.</p>
+            {% endif %}
+            <h3>Noter ce masque</h3>
+
+            {{ form_start(formNote) }}
+                <div id="star-widget" class="star-widget" data-already-rated="{{ userHasRated ? 1 : 0 }}">
+                    {% for i in 1..5 %}
+                        <span class="star" data-value="{{ i }}">&#9733;</span>
+                    {% endfor %}
+                </div>
+                {{ form_widget(formNote.note, {'id': 'notation_note_hidden'}) }}
+            {{ form_end(formNote) }}
+            <h2>Commentaires</h2>
+            <ul>
+                {% for commentaire in masque.commentaires %}
+                    <li>
+                        <strong>
+                        {% if commentaire.auteur %}
+                            {{ commentaire.auteur }}
+                        {% elseif commentaire.user %}
+                            {{ commentaire.user.username }}
+                        {% else %}
+                            Anonyme
+                        {% endif %}
+                        </strong> :
+                        {{ commentaire.commentaire }}
+                    </li>
+                {% else %}
+                <li>Aucun commentaire.</li>
+                {% endfor %}
+            </ul>
+
+            {% if app.user %}
+                <h3>Ajouter un commentaire</h3>
+                {{ form_start(form) }}
+                {{ form_row(form.auteur, { label: 'Votre nom (facultatif)' }) }}
+                {{ form_row(form.commentaire) }}
+                <button type="submit">Envoyer</button>
+                {{ form_end(form) }}
+            {% else %}
+                <p>🔒 <a href="{{ path('app_login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+            {% endif %}
+        </div>
+    </section>
+    <script>
+        window.userHasRated = {{ userHasRated ? 'true' : 'false' }};
+    </script>
 {% endblock %}

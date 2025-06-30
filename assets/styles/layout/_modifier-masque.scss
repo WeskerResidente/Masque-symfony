@@ -1,0 +1,62 @@
+.modifier-masque-page {
+  background-color: #0b0b0b;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 1rem;
+  color: white;
+
+  .modifier-masque-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 0 25px rgba(230, 199, 121, 0.2);
+    backdrop-filter: blur(6px);
+
+    h1 {
+      text-align: center;
+      color: #e6c779;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 4px black;
+    }
+
+    label {
+      color: #e6c779;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #fff;
+      color: #111;
+      font-size: 1rem;
+    }
+
+    button.btn {
+      background-color: #e6c779;
+      color: #0b0b0b;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+
+      &:hover {
+        background-color: #c9ac5f;
+      }
+    }
+  }
+}

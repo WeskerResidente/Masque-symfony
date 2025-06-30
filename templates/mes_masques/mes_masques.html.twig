@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Masques{% endblock %}
+
+{% block body %}
+<section class="mes-masques">
+    <h1 class="text-masques"> Mes Masques</h1>
+    
+    <div class="masque-grid">
+        {% for masque in masques %}
+            <div class="masque-card">
+                <img class="masque-img" src="{{ asset('uploads/images/' ~ masque.imageName) }}" alt="{{ masque.nom }}">
+
+                <div class="masque-info">
+                    <h2>{{ masque.nom }}</h2>
+                    <p>{{ masque.caracteristique }}</p>
+                    <p>{{ masque.valeur }} €</p>
+                    <p>{{ masque.description }}</p>
+
+                    <div class="actions">
+                        <a href="{{ path('app_modifier_masque', { id: masque.id }) }}" class="btn modifier">✏ Modifier</a>
+                        <form method="POST" action="{{ path('masque', { id: masque.id }) }}" onsubmit="return confirm('Supprimer {{ masque.nom }} ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ masque.id) }}">
+                            <button type="submit" class="btn supprimer">🗑 Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <a href="{{ path('masque_detail', { id: masque.id }) }}" class="full-link"></a>
+            </div>
+        {% else %}
+    </div>
+        <div class="masque-empty-message">
+            <p> Aucun masque créé pour le moment.</p>
+            <a href="{{ path('app_add_masque_controlleur') }}" class="btn-creer-masque">➕ Ajouter votre masque</a>
+        </div>
+        {% endfor %}
+
+</section>
+{% endblock %}

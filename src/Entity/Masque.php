@@ -13,12 +13,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 
-
 #[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: MasqueRepository::class)]
 class Masque
 {
-    
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->notations = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
@@ -132,11 +137,6 @@ class Masque
     #[ORM\OneToMany(mappedBy: 'masque', targetEntity: Commentaire::class, cascade: ['persist', 'remove'])]
     private Collection $commentaires;
 
-    public function __construct()
-    {
-        $this->commentaires = new ArrayCollection();
-    }
-
     public function getCommentaires(): Collection
     {
         return $this->commentaires;
@@ -152,5 +152,33 @@ class Masque
     {
         $this->createdBy = $user;
         return $this;
+    }
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+    #[ORM\OneToMany(mappedBy: 'masque', targetEntity: Notation::class, cascade: ['remove'], orphanRemoval: true)]
+    private Collection $notations;
+
+    public function getNotations(): Collection
+    {
+        return $this->notations;
+    }
+
+    public function getAverageNote(): ?float
+    {
+        if ($this->notations->isEmpty()) return null;
+
+        $sum = array_reduce($this->notations->toArray(), fn($carry, $notation) => $carry + $notation->getNote(), 0);
+        return round($sum / count($this->notations), 1);
     }
 }

@@ -1,0 +1,35 @@
+.global-flash.success {
+  background-color: rgba(230, 199, 121, 0.1); // fond doré doux
+  border: 1px solid #e6c779;
+  color: #e6c779;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  text-shadow: 0 0 2px black;
+  box-shadow: 0 0 10px rgba(230, 199, 121, 0.3);
+  animation: fadeInFlash 0.5s ease-out;
+}
+
+@keyframes fadeInFlash {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.global-flash {
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+
+  &.fade-out {
+    opacity: 0;
+  }
+}

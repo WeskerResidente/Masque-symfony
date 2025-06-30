@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Constraints\File as FileConstraint;
 
 class MasqueTypeForm extends AbstractType
@@ -18,7 +19,7 @@ class MasqueTypeForm extends AbstractType
         $builder
             ->add('nom')
             ->add('caracteristique', TextType::class, [
-                'label' => 'Caractéristique',
+                'label' => 'Caractéristique (provenance, particularité...)',
                 'required' => true,
             ])
             ->add('description', TextareaType::class, [
@@ -36,7 +37,9 @@ class MasqueTypeForm extends AbstractType
                     ])
                 ],
             ])
-            ->add('valeur');
+                ->add('valeur', IntegerType::class, [
+                'label' => 'Valeur en €',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
