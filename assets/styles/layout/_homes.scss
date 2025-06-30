@@ -1,25 +1,27 @@
 .accueil {
   position: relative;
-  background: url('~/public/images/background-home2.webp')no-repeat center center;
+  background: url('~/public/images/background-home2.webp') no-repeat center center;
   background-size: cover;
   min-height: 100vh;
-  padding-top: 4rem;
+  padding-top: 0;
   color: white;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-.intro {
+  .intro {
     position: relative;
     z-index: 5;
     max-width: 800px;
-    margin: 0 auto 4rem;
-    padding: 0 1rem;
-    margin-top: 15rem;
-    margin-left: 29rem;
+    padding: 1rem;
+    margin: 0; // ✅ on supprime margin-top et margin-left
 
     h1 {
       font-size: 2.8rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       color: #e6c779;
       text-shadow: 0 0 10px black;
     }
@@ -40,10 +42,8 @@
   }
 
   .swiper {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 7rem; // ↤ ajuste cette valeur pour que ça tombe pile sur le plateau
+    position: relative;
+    margin-top: 2rem;
     width: 90%;
     max-width: 800px;
     z-index: 10;
@@ -67,6 +67,7 @@
     color: white;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
+    flex-shrink: 0;
 
     &:hover {
       transform: scale(1.05);
@@ -81,6 +82,15 @@
     .infos {
       padding: 0.5rem;
       font-size: 0.9rem;
+
+      h3 {
+        margin: 0.2rem 0;
+        font-size: 1.1rem;
+      }
+
+      p {
+        margin: 0;
+      }
     }
   }
 
@@ -90,56 +100,73 @@
     filter: drop-shadow(0 0 5px black);
   }
 }
-.carousel-card {
-  width: 200px;
-  height: auto;
-  min-height: 280px;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  transform-origin: center;
-  padding-bottom: 1rem;
 
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
+// ✅ Responsives
 
-  .infos {
-    padding: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.2rem;
-
-    h3 {
-      margin: 0.2rem 0;
-      font-size: 1.1rem;
+@media (max-width: 992px) {
+  .accueil .intro {
+    h1 {
+      font-size: 2rem;
     }
-
     p {
-      margin: 0;
+      font-size: 1rem;
+    }
+    h2 {
+      font-size: 1.5rem;
     }
   }
 
-  &:hover {
-    transform: scale(1.05);
+  .carousel-card {
+    width: 160px;
+
+    img {
+      height: 160px;
+    }
+
+    .infos {
+      font-size: 0.85rem;
+    }
   }
 }
 
+@media (max-width: 768px) {
+  .accueil .intro {
+    h1 {
+      font-size: 1.6rem;
+    }
+    p, h2 {
+      font-size: 1rem;
+    }
+  }
 
-.swiper {
-  position: absolute;
-  bottom: 6rem;
-  left: 50%;
-  margin-left: -40px; // 🔁 Ajuste cette valeur vers -100px ou -120px selon le visuel
-  width: 90%;
-  max-width: 800px;
-  z-index: 10;
+  .carousel-card {
+    width: 140px;
+
+    img {
+      height: 140px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .accueil .intro {
+    h1 {
+      font-size: 1.4rem;
+    }
+    p, h2 {
+      font-size: 0.9rem;
+    }
+  }
+
+  .carousel-card {
+    width: 120px;
+
+    img {
+      height: 120px;
+    }
+
+    .infos {
+      font-size: 0.8rem;
+    }
+  }
 }
