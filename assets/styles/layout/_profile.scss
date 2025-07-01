@@ -1,0 +1,91 @@
+.profile-page {
+  max-width: 500px;
+  margin: 3rem auto;
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  color: #f8f8f8;
+  font-family: 'Cinzel', serif;
+}
+
+.profile-page h1 {
+  color: #e6c779;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.avatar-preview {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e6c779;
+  box-shadow: 0 0 8px rgba(230, 199, 121, 0.5);
+}
+
+.profile-page form {
+  margin-top: 1.5rem;
+}
+
+.profile-page form .btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  background-color: transparent;
+  color: #e6c779;
+  border: 2px solid #e6c779;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-page form .btn:hover {
+  background-color: #e6c779;
+  color: #0b0b0b;
+}
+
+.profile-page .alert-success {
+  background-color: #333;
+  color: #e6c779;
+  border: 1px solid #e6c779;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.profile-page form input,
+.profile-page form textarea,
+.profile-page form select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #555;
+  background-color: #2c2c2c;
+  color: #f8f8f8;
+  border-radius: 6px;
+  transition: border 0.3s ease;
+}
+
+.profile-page form input:focus,
+.profile-page form textarea:focus,
+.profile-page form select:focus {
+  border-color: #e6c779;
+  outline: none;
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: #e57373;
+  border: 2px solid #e57373;
+}
+
+.btn-danger:hover {
+  background-color: #e57373;
+  color: #0b0b0b;
+}

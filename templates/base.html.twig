@@ -18,10 +18,10 @@
     </head>
     <body>
         {% block content %}
-            <nav class="navbar">
+           <nav class="navbar">
                 <div class="logo">
                     <a href="{{ path('app_home') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo Le Masque du Virtuose">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo">
                     </a>
                 </div>
 
@@ -29,37 +29,60 @@
                     <span>Le Masque<br>du Virtuose</span>
                 </div>
 
-                <ul class="nav-links">
-                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_liste_masques') }}">Masques</a></li>
+                <div class="nav-right">
                     {% if app.user %}
-                        <li><a href="{{ path('app_add_masque_controlleur') }}">Ajouter</a></li>
+                    <div class="user-info-fixed">
+                        {% if app.user.avatar %}
+                        <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" class="avatar-navbar">
+                        {% else %}
+                        <img src="{{ asset('images/default-avatar.png') }}" alt="Avatar par défaut" class="avatar-navbar">
+                        {% endif %}
+                        <span>{{ app.user.pseudo }}</span>
+                    </div>
+                    {% endif %}
+
+                    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+                    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+                    <ul class="nav-links">
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    {% if app.user %}
+                        <li class="dropdown">
+                        <a href="#">Masques ▾</a>
+                        <ul class="dropdown-content">
+                            <li><a href="{{ path('app_liste_masques') }}">Tous les masques</a></li>
+                            <li><a href="{{ path('app_add_masque_controlleur') }}">Ajouter un masque</a></li>
+                            <li><a href="{{ path('app_mes_masques') }}">Mes masques</a></li>
+                        </ul>
+                        </li>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('admin') }}">Admin</a></li>
+                        <li><a href="{{ path('admin') }}">Admin</a></li>
                         {% endif %}
-                        {% if app.user %}
-                            <li><a href="{{ path('app_mes_masques') }}"> Mes masques</a></li>
-                        {% endif %}
+                        <li><a href="{{ path('app_profile') }}">Profil</a></li>
                         <li><a href="{{ path('app_contact') }}">Contact</a></li>
                         <li>
-                            <form action="{{ path('app_logout') }}" method="post">
-                                <button class="btn-logout" type="submit">🚪 Déconnexion</button>
-                            </form>
+                        <form action="{{ path('app_logout') }}" method="post">
+                            <button class="btn-logout" type="submit">🚪 Déconnexion</button>
+                        </form>
                         </li>
                     {% else %}
                         <li><a href="{{ path('app_register') }}">Inscription</a></li>
                         <li><a href="{{ path('app_login') }}">Connexion</a></li>
                     {% endif %}
-                </ul>
-            </nav>
+                    </ul>
+                </div>
+                </nav>
+
         {% endblock %}
+
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                    <div class="global-flash {{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+                <div class="global-flash {{ label }}">
+                    {{ message }}
+                </div>
             {% endfor %}
-        {% block body %}{% endblock %}
+        {% endfor %}
 
+        {% block body %}{% endblock %}
+    </body>
 </html>

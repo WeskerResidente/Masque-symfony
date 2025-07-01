@@ -17,7 +17,7 @@
     z-index: 5;
     max-width: 800px;
     padding: 1rem;
-    margin: 0; // ✅ on supprime margin-top et margin-left
+    margin: 0; 
 
     h1 {
       font-size: 2.8rem;
@@ -125,48 +125,6 @@
 
     .infos {
       font-size: 0.85rem;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .accueil .intro {
-    h1 {
-      font-size: 1.6rem;
-    }
-    p, h2 {
-      font-size: 1rem;
-    }
-  }
-
-  .carousel-card {
-    width: 140px;
-
-    img {
-      height: 140px;
-    }
-  }
-}
-
-@media (max-width: 576px) {
-  .accueil .intro {
-    h1 {
-      font-size: 1.4rem;
-    }
-    p, h2 {
-      font-size: 0.9rem;
-    }
-  }
-
-  .carousel-card {
-    width: 120px;
-
-    img {
-      height: 120px;
-    }
-
-    .infos {
-      font-size: 0.8rem;
     }
   }
 }

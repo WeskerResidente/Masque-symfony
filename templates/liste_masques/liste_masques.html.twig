@@ -48,7 +48,7 @@
             <p>Description : {{ shortDescription }}</p>
 
             {% if masque.createdBy %}
-              <p class="auteur">par {{ masque.createdBy.email }}</p>
+              <p class="auteur">par {{ masque.createdBy.pseudo }}</p>
             {% else %}
               <p class="auteur">auteur inconnu</p>
             {% endif %}

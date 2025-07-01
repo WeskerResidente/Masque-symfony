@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+<section class="profile-page" style="max-width: 400px; margin: auto; text-align: center;">
+    <h1>Mon profil</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% if app.user.avatar %}
+        <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Mon avatar" class="avatar-preview">
+    {% else %}
+        <img src="{{ asset('images/default-avatar.png') }}" alt="Avatar par défaut" class="avatar-preview">
+    {% endif %}
+
+    <div style="text-align: left;">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn">Mettre à jour</button>
+        {{ form_end(form) }}
+
+        <form method="post" action="{{ path('app_profile_delete') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete-user') }}">
+            <button class="btn btn-danger mt-3">Supprimer mon compte</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

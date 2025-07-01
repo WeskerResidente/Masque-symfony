@@ -181,4 +181,18 @@ class Masque
         $sum = array_reduce($this->notations->toArray(), fn($carry, $notation) => $carry + $notation->getNote(), 0);
         return round($sum / count($this->notations), 1);
     }
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'masques')]
+    private ?User $user = null;
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
 }

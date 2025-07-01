@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250626083509 extends AbstractMigration
+final class Version20250701091550 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,13 +21,13 @@ final class Version20250626083509 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE masque ADD created_by_id INT DEFAULT NULL
+            ALTER TABLE masque ADD user_id INT DEFAULT NULL
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE masque ADD CONSTRAINT FK_E2D3F6ABB03A8386 FOREIGN KEY (created_by_id) REFERENCES user (id)
+            ALTER TABLE masque ADD CONSTRAINT FK_E2D3F6ABA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE INDEX IDX_E2D3F6ABB03A8386 ON masque (created_by_id)
+            CREATE INDEX IDX_E2D3F6ABA76ED395 ON masque (user_id)
         SQL);
     }
 
@@ -35,13 +35,13 @@ final class Version20250626083509 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE masque DROP FOREIGN KEY FK_E2D3F6ABB03A8386
+            ALTER TABLE masque DROP FOREIGN KEY FK_E2D3F6ABA76ED395
         SQL);
         $this->addSql(<<<'SQL'
-            DROP INDEX IDX_E2D3F6ABB03A8386 ON masque
+            DROP INDEX IDX_E2D3F6ABA76ED395 ON masque
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE masque DROP created_by_id
+            ALTER TABLE masque DROP user_id
         SQL);
     }
 }

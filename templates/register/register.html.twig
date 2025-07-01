@@ -4,17 +4,15 @@
 
 {% block body %}
 <section class="login-page">
-  <form>
+  {{ form_start(form, {'attr': {'class': 'form-box'}}) }}
     <h1>Inscription</h1>
 
     {% for message in app.flashes('success') %}
       <div class="mb-3">{{ message }}</div>
     {% endfor %}
 
-    {{ form_start(form) }}
-      {{ form_widget(form) }}
-      <button type="submit" class="btn">S’inscrire</button>
-    {{ form_end(form) }}
-  </form>
+    {{ form_widget(form) }}
+    <button type="submit" class="btn">S’inscrire</button>
+  {{ form_end(form) }}
 </section>
 {% endblock %}
