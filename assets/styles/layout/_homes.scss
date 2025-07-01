@@ -1,34 +1,73 @@
 .accueil {
-  background: url('../../../public/images/Background-home.png') no-repeat center;
+  position: relative;
+  background: url('~/public/images/background-home2.webp') no-repeat center center;
   background-size: cover;
   min-height: 100vh;
-  padding: 3rem 2rem;
+  padding-top: 0;
   color: white;
   text-align: center;
-  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  h1, h2, p {
-    text-shadow: 0 0 10px black;
+  .intro {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+    padding: 1rem;
+    margin: 0; // ✅ on supprime margin-top et margin-left
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      color: #e6c779;
+      text-shadow: 0 0 10px black;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #f0f0f0;
+      text-shadow: 0 0 8px black;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #e6c779;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px black;
+    }
   }
 
-  .masques-grid {
-    margin-top: 4rem;
+  .swiper {
+    position: relative;
+    margin-top: 2rem;
+    width: 90%;
+    max-width: 800px;
+    z-index: 10;
+  }
+
+  .swiper-wrapper {
+    align-items: center;
+  }
+
+  .swiper-slide {
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow-x: auto;
-    gap: 1.5rem;
-    padding: 1rem;
   }
 
-  .masque-card {
+  .carousel-card {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 12px;
-    padding: 1rem;
-    min-width: 200px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    width: 200px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
-    cursor: pointer;
+    flex-shrink: 0;
 
     &:hover {
       transform: scale(1.05);
@@ -36,8 +75,98 @@
 
     img {
       width: 100%;
-      border-radius: 8px;
-      margin-top: 0.5rem;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .infos {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+
+      h3 {
+        margin: 0.2rem 0;
+        font-size: 1.1rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: white;
+    filter: drop-shadow(0 0 5px black);
+  }
+}
+
+// ✅ Responsives
+
+@media (max-width: 992px) {
+  .accueil .intro {
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .carousel-card {
+    width: 160px;
+
+    img {
+      height: 160px;
+    }
+
+    .infos {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .accueil .intro {
+    h1 {
+      font-size: 1.6rem;
+    }
+    p, h2 {
+      font-size: 1rem;
+    }
+  }
+
+  .carousel-card {
+    width: 140px;
+
+    img {
+      height: 140px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .accueil .intro {
+    h1 {
+      font-size: 1.4rem;
+    }
+    p, h2 {
+      font-size: 0.9rem;
+    }
+  }
+
+  .carousel-card {
+    width: 120px;
+
+    img {
+      height: 120px;
+    }
+
+    .infos {
+      font-size: 0.8rem;
     }
   }
 }

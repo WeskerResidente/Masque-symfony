@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 
+use App\Entity\Masque;
+use App\Entity\Contact;
+use App\Entity\Commentaire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -33,7 +36,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('User', 'fas fa-ice-cream', User::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Masques', 'fas fa-theater-masks', Masque::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Commentaire::class);
+        yield MenuItem::linkToCrud('Notations', 'fas fa-star', \App\Entity\Notation::class);
+        yield MenuItem::linkToRoute('Retour au site', 'fas fa-undo', 'app_home');
+
     }
 }

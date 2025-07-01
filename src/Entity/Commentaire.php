@@ -80,5 +80,20 @@ class Commentaire
         $this->createdAt = new \DateTimeImmutable();
     }
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $auteur = null;
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?string $auteur): static
+    {
+        $this->auteur = $auteur;
+        return $this;
+    }
+
+
 
 }

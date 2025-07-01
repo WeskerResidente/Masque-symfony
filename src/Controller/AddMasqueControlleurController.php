@@ -21,11 +21,12 @@ final class AddMasqueControlleurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $masque->setCreatedBy($this->getUser()); // ✅ ici on utilise bien $masque
+            $masque->setCreatedBy($this->getUser()); 
             $entityManager->persist($masque);
+            $masque->setCreatedAt(new \DateTimeImmutable());
             $entityManager->flush();
 
-            $this->addFlash('success', 'Masque ajouté avec succès !');
+            $this->addFlash('success', '🎭  Masque ajouté avec succès !');
             return $this->redirectToRoute('app_home');
         }
 
