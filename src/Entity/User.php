@@ -31,8 +31,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
-    private ?string $password = null;
+    // #[ORM\Column]
+    // private ?string $password = null;
 
     public function getId(): ?int
     {
@@ -43,7 +43,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->email;
     }
-
     public function setEmail(string $email): static
     {
         $this->email = $email;
