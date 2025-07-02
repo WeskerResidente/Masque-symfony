@@ -59,10 +59,9 @@
       margin-top: 1.5rem;
       font-weight: bold;
       transition: background 0.3s;
-
+      cursor: pointer;
       &:hover {
         background-color: #c9ac5f;
-              cursor: pointer;
       }
     }
 
@@ -73,11 +72,9 @@
       text-align: center;
       margin-top: 1rem;
       width: 100%;
-
       a {
         color: #e6c779;
         text-decoration: underline;
-
         &:hover {
           text-decoration: none;
         }
