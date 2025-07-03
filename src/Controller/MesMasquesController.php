@@ -21,4 +21,5 @@ final class MesMasquesController extends AbstractController
             'masques' => $mesMasques,
         ]);
     }
+    
 }
