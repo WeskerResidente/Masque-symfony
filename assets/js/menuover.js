@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const toggleBtn = document.getElementById("toggleMasques");
     const submenu = document.getElementById("submenuMasques");
@@ -16,4 +18,5 @@ document.addEventListener("DOMContentLoaded", function() {
             submenu.classList.toggle("show");
         }
     });
+    console.log('🎯 Menuover OFF');
 });
