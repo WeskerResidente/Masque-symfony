@@ -200,18 +200,17 @@
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: #222;
     position: absolute;
     top: 100%;
     right: 0;
     width: 220px;
-    padding: 10px 0;
+    background: #222;
     border-radius: 8px;
+    padding: 10px 0;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
-    z-index: 9999;
   }
 
   .menu-toggle:checked + .menu-icon + .nav-links {
