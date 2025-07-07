@@ -230,6 +230,7 @@
     color: #f8f8f8;
     text-decoration: none;
     transition: background 0.3s ease;
+            font-weight: 1500;
   }
 
   .nav-links li a:hover {
@@ -250,4 +251,24 @@
   .nav-links li form button:hover {
     background-color: #333;
   }
+}
+
+@media screen and (max-width: 560px){
+
+ .navbar {
+  display: flex;
+  flex-direction: column;
+  .logo{
+          max-width: 100%;
+          object-fit:cover;
+    img{
+      height: 166px;
+
+    }
+  }
+
+ }
+   .menu-icon{
+    font-size: 50px;
+   }
 }
