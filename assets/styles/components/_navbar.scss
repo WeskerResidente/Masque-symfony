@@ -197,6 +197,9 @@
         margin-left: 0;
       }
   }
+  .toggleMasques{
+        pointer-events: none;
+  }
   .nav-links {
     flex-direction: column;
     position: absolute;
