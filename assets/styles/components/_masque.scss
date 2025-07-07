@@ -115,3 +115,64 @@
   inset: 0;
   z-index: 1;
 }
+@media (max-width: 1024px) {
+  .masque-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .masque-card {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .masque-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .masque-card {
+    height: auto;
+    flex-direction: column;
+
+    .masque-img {
+      position: relative;
+      height: 200px;
+    }
+
+    .masque-info {
+      background: #111;
+      padding: 1rem;
+
+      h2 {
+        font-size: 1.1rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .masque-grid {
+    padding: 0.5rem;
+  }
+
+  .masque-card {
+    .masque-info {
+      padding: 0.8rem;
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
