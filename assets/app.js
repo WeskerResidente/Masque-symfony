@@ -9,6 +9,7 @@ import './styles/app.scss';
 import './js/stars.js';
 import './js/swipper.js';
 import './js/menuover.js';
+import './js/ajax.js';
 
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

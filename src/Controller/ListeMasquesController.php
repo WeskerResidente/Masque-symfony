@@ -21,9 +21,18 @@ class ListeMasquesController extends AbstractController
 
             $masques = $repository->findSearch($searchData);
 
-            return $this->render('liste_masques/liste_masques.html.twig', [
+        // Si la requête est AJAX
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('liste_masques/_masques_list.html.twig', [
                 'masques' => $masques,
-                'form' => $form->createView(),
             ]);
+        }
+
+        // Requête normale (page complète)
+        return $this->render('liste_masques/liste_masques.html.twig', [
+            'masques' => $masques,
+            'form' => $form->createView(),
+        ]);
+        
         }
 }
