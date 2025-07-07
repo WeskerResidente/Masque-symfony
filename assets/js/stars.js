@@ -34,13 +34,19 @@ document.addEventListener('DOMContentLoaded', function () {
         star.addEventListener('mouseout', () => highlightStars(parseInt(input.value) - 1));
     });
 
-    function highlightStars(index) {
-        stars.forEach((star, i) => {
-            star.style.color = i <= index ? 'gold' : '#888';
-        });
-    }
+        function highlightStars(index) {
+            if (index > 3) index = 3; // car index = valeur - 1
+            stars.forEach((star, i) => {
+                star.style.color = i <= index ? 'gold' : '#888';
+            });
+        }
+
 
     if (input.value) {
+        if (input.value > 4) {
+            input.value = 4;
+        }
         highlightStars(parseInt(input.value) - 1);
     }
+
 });

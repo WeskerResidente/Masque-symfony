@@ -17,28 +17,33 @@
             {% endif %}
             <h3>Notes</h3>
 
-            {% set moyenne = masque.getAverageNote() %}
-            {% if moyenne %}
-                {% set pleine = moyenne|round(0, 'floor') %}
-                {% set vide = 5 - pleine %}
-
-                <p>
-                    Note moyenne : <strong>{{ moyenne }}/5</strong>
-                    {% for i in 1..pleine %}
-                        <span style="color: gold;">&#9733;</span>
-                    {% endfor %}
-                    {% for i in 1..vide %}
-                        <span style="color: #666;">&#9733;</span>
-                    {% endfor %}
-                </p>
-            {% else %}
-                <p>Ce masque n’a pas encore été noté.</p>
+        {% set moyenne = masque.getAverageNote() %}
+        {% if moyenne %}
+            {% set moyenneLimitee = moyenne > 4 ? 4 : moyenne %}
+            {% set pleine = moyenneLimitee|round(0, 'floor') %}
+            {% set vide = 4 - pleine %}
+            {% if vide < 0 %}
+                {% set vide = 0 %}
             {% endif %}
+
+            <p>
+                Note moyenne : <strong>{{ moyenneLimitee|number_format(1, '.', '') }}/4</strong>
+                {% for i in 1..pleine %}
+                    <span class="star-average">&#9733;</span>
+                {% endfor %}
+
+            </p>
+        {% else %}
+            <p>Ce masque n’a pas encore été noté.</p>
+        {% endif %}
+
+
+
             <h3>Noter ce masque</h3>
 
             {{ form_start(formNote) }}
                 <div id="star-widget" class="star-widget" data-already-rated="{{ userHasRated ? 1 : 0 }}">
-                    {% for i in 1..5 %}
+                    {% for i in 1..4 %}
                         <span class="star" data-value="{{ i }}">&#9733;</span>
                     {% endfor %}
                 </div>
