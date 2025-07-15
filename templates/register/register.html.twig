@@ -4,7 +4,7 @@
 
 {% block body %}
 <section class="login-page">
-  {{ form_start(form, {'attr': {'class': 'form-box'}}) }}
+  {{ form_start(form, {'attr': {'class': 'form-box', 'id': 'registration-form'}}) }}
     <h1>Inscription</h1>
 
     {% for message in app.flashes('success') %}
@@ -15,4 +15,44 @@
     <button type="submit" class="btn">S’inscrire</button>
   {{ form_end(form) }}
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registration-form');
+    // Remplace "plainPassword_first" par l'ID réel généré par Symfony
+    const passwordField = document.getElementById('{{ form.plainPassword.first.vars.id }}');
+    const confirmField = document.getElementById('{{ form.plainPassword.second.vars.id }}');
+
+    form.addEventListener('submit', function(event) {
+      const password = passwordField.value;
+      const confirm = confirmField.value;
+
+      let errorMessage = '';
+
+      if (password.length < 8) {
+        errorMessage += 'Le mot de passe doit contenir au moins 8 caractères.\n';
+      }
+      if (!/[A-Z]/.test(password)) {
+        errorMessage += 'Le mot de passe doit contenir au moins une majuscule.\n';
+      }
+      if (!/[a-z]/.test(password)) {
+        errorMessage += 'Le mot de passe doit contenir au moins une minuscule.\n';
+      }
+      if (!/[0-9]/.test(password)) {
+        errorMessage += 'Le mot de passe doit contenir au moins un chiffre.\n';
+      }
+      if (!/[^A-Za-z0-9]/.test(password)) {
+        errorMessage += 'Le mot de passe doit contenir au moins un caractère spécial.\n';
+      }
+      if (password !== confirm) {
+        errorMessage += 'Les mots de passe ne correspondent pas.\n';
+      }
+
+      if (errorMessage) {
+        alert(errorMessage);
+        event.preventDefault();
+      }
+    });
+  });
+</script>
 {% endblock %}
