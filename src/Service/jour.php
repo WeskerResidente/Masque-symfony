@@ -16,7 +16,7 @@ class jour
         $daysDiff = (int) $interval->format('%R%a');
 
         if ($daysDiff === 0) {
-            return "C'est aujourd'hui ! Profite du moment présent 🟢";
+            return "☆*: .｡. o(≧▽≦)o .｡.:*☆";
         } elseif ($daysDiff === -1) {
             return "C'était hier. Un masque de plus dans l'histoire ! 🕰️";
         } elseif ($daysDiff === 1) {
