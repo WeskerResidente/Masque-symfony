@@ -145,4 +145,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->avatar = $avatar;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->pseudo ?? $this->email ?? 'Utilisateur';
+    }
 }

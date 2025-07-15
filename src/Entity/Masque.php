@@ -195,4 +195,8 @@ class Masque
         $this->user = $user;
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->nom ?? 'Masque #' . $this->id;
+    }
 }

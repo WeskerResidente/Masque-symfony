@@ -14,7 +14,7 @@ class NotationCrudController extends AbstractCrudController
         return Notation::class;
     }
 
-    public function configureFields(string $pageName): iterable
+    public function configureFields(string $pageName): array
     {
         return [
             IntegerField::new('note', 'Note')
